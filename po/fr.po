@@ -1,0 +1,88 @@
+# Iconify text catalog.
+# Copyright (C) 2012 Sylvain Rodon
+# This file is distributed under the same license as the Iconify package.
+# Sylvain Rodon, 2012
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-11-09 11:20+0100\n"
+"PO-Revision-Date: 2012-11-09 11:21+0100\n"
+"Last-Translator: Sylvain <sylvain.rodon@wanadoo.fr>\n"
+"Language-Team: French\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: iconify.c:427
+#, c-format
+msgid "Can't find specified icon\n"
+msgstr "Icone introuvable\n"
+
+#: iconify.c:336
+#, c-format
+msgid "Error while reading sub-child output : %s"
+msgstr "Erreur lors de la lecture de la sortie du processus: %s"
+
+#: iconify.c:248
+#, c-format
+msgid "Invalid height: %s\n"
+msgstr "Hauteur invalide: %s\n"
+
+#: iconify.c:252
+#, c-format
+msgid "Invalid width: %s\n"
+msgstr "Largeur invalide: %s\n"
+
+#: iconify.c:261
+#, c-format
+msgid ""
+"Missing argument for option: %c\n"
+"\n"
+msgstr "Argument manquant pour l'option: %c\n\n"
+
+#: iconify.c:186
+#, c-format
+msgid "Program couldn't be launched ...\n"
+msgstr "Le programme n'a pas pu être lancé ...\n"
+
+#: iconify.c:203
+msgid "Sub-program ended !"
+msgstr "Le processus s'est arreté !"
+
+#: iconify.c:272
+#, c-format
+msgid ""
+"Too few arguments\n"
+"\n"
+msgstr "Trop peu d'arguments\n\n"
+
+#: iconify.c:265
+#, c-format
+msgid ""
+"Unknown option: %c\n"
+"\n"
+msgstr "Option inconnue: %c\n\n"
+
+#: iconify.c:447
+msgid "_Hide"
+msgstr "_Fermer"
+
+#: iconify.c:487
+msgid "_Line breaks"
+msgstr "_Sauts de ligne"
+
+#: iconify.c:208
+msgid "_Quit"
+msgstr "_Quitter"
+
+#: iconify.c:453
+msgid "_Stop (SIGINT)"
+msgstr "_Arreter (SIGINT)"
+
+#: iconify.c:565
+msgid "_Stop (SIGKILL)"
+msgstr "Arreter (SIGKILL)"
