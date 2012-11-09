@@ -35,7 +35,7 @@
 
 #define _(String) dgettext("iconify",String)
 
-#define DEFAULT_ICON_PATH "/usr/share/icons/im.png"
+#define DEFAULT_ICON_PATH "/usr/share/pixmaps/iconify.png"
 #define DEFAULT_TITLE "Iconify"
 #define DEFAULT_TOOLTIP "Iconify"
 #define DEFAULT_WIDTH 500
