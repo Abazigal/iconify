@@ -98,11 +98,11 @@ int main(int argc, char **argv)
 
     gtk_init(&argc, &argv);
 
-    
+
     memset(&interface, 0, sizeof(app_elems));
     memset(&arguments, 0, sizeof(args));
-    
-    
+
+
     if (!(parse_cmdline(argc, argv, &arguments)))
 	return EXIT_FAILURE;
 
@@ -115,8 +115,8 @@ int main(int argc, char **argv)
 	    perror("fork");
 	    return EXIT_FAILURE;
 	case 0:
-	    if(setsid() == -1)
-	        perror("setsid");
+	    if (setsid() == -1)
+		perror("setsid");
 	    /* Child will execute the rest of the code */
 	    break;
 	default:
@@ -258,7 +258,8 @@ int parse_cmdline(int argc, char **argv, args * arguments)
 	    arguments->various |= sFLAG;
 	    break;
 	case ':':
-	    fprintf(stderr, _("Missing argument for option: %c\n\n"), optopt);
+	    fprintf(stderr, _("Missing argument for option: %c\n\n"),
+		    optopt);
 	    usage();
 	    return 0;
 	default:
@@ -445,12 +446,18 @@ void init_interface(app_elems * interface, args * arguments, int source)
 
     /* Quit button */
     GtkWidget *b1 = gtk_button_new_with_mnemonic(_("_Hide"));
+    gtk_button_set_image(GTK_BUTTON(b1),
+			 gtk_image_new_from_stock(GTK_STOCK_QUIT,
+						  GTK_ICON_SIZE_BUTTON));
     g_signal_connect(G_OBJECT(b1), "clicked",
 		     G_CALLBACK(cb_close_or_reduce), interface);
     interface->quitbutton = b1;
 
     /* Kill button */
     GtkWidget *b2 = gtk_button_new_with_mnemonic(_("_Stop (SIGINT)"));
+    gtk_button_set_image(GTK_BUTTON(b2),
+			 gtk_image_new_from_stock(GTK_STOCK_STOP,
+						  GTK_ICON_SIZE_BUTTON));
     g_signal_connect(G_OBJECT(b2), "clicked", G_CALLBACK(cb_kill_child),
 		     interface);
     interface->killbutton = b2;

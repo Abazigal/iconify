@@ -1,4 +1,6 @@
 *.[oa]
 *~
+*.swp
 mo/*
 mo
+iconify
