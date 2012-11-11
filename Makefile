@@ -1,35 +1,61 @@
 CFLAGS=
 GTK=`pkg-config --cflags --libs gtk+-3.0`
+
 PREFIX=/usr
+LOCALE_DIR = $(PREFIX)/share/locale
+ICON_DIR = $(PREFIX)/share/pixmaps
+BIN_DIR = $(PREFIX)/bin
+
+PO_DIR = po
+PO = $(wildcard $(PO_DIR)/*.po)
+MO = $(PO:%.po=%.mo)
+
 
 all : iconify
 
-iconify: bin mo
-	
-
-mo:
-	mkdir -p mo/fr/LC_MESSAGES
-	msgfmt -co mo/fr/LC_MESSAGES/iconify.mo po/fr.po
-
-bin: iconify.o
+iconify: iconify.o
 	gcc iconify.o -O3 -o iconify $(CFLAGS) $(GTK)
 
-clean:
-	rm -f iconify iconify.o
-	rm -r mo
 
 %.o: src/%.c
 	gcc -c -g -Wall -O3 $(CFLAGS) $< $(GTK)
 
-install:
-	cp iconify $(PREFIX)/bin/
-	chmod a+x $(PREFIX)/bin/iconify
-	cp data/iconify.png $(PREFIX)/share/pixmaps/
-	chmod a+r $(PREFIX)/share/pixmaps/iconify.png
-	cp -R mo/* $(PREFIX)/share/locale
-	chmod a+r $(PREFIX)/share/locale/**/LC_MESSAGES/iconify.mo
+$(MO): $(PO_DIR)/%.mo: $(PO_DIR)/%.po
+	@echo "formatting '$*.po'"
+	@msgfmt $(PO_DIR)/$*.po -o $@
+
+
+
+install: install_bin install_icon install_mo
+
+install_bin: iconify
+	@echo "installing iconify to '$(BIN_DIR)'"
+	@install -d -m 755 $(BIN_DIR)
+	@install -m 755 iconify $(BIN_DIR)
+
+install_icon:
+	@echo "Installing icon to '$(ICON_DIR)'"
+	@install -d $(ICON_DIR)
+	@install -m 644 data/iconify.png $(ICON_DIR)
+
+install_mo: $(MO)
+	@echo "installing *.mo files to '$(LOCALE_DIR)'"
+	@for i in `ls $(PO_DIR)/*.mo` ; do \
+		mkdir -p $(LOCALE_DIR)/`echo $$i | grep -o [^/]*$$ | sed -e s/.mo//`/LC_MESSAGES;\
+		install -c -m644 $$i $(LOCALE_DIR)/`echo $$i | grep -o [^/]*$$ | sed -e s/.mo//`/LC_MESSAGES/iconify.mo ; \
+	done
+
+
+clean:
+	@echo "cleaning up"
+	@rm -f iconify
+	@rm -f $(PO_DIR)/*.mo
+	@rm -f *.o
 
 uninstall:
-	rm $(PREFIX)/bin/iconify
-	rm $(PREFIX)/share/pixmaps/iconify.png
-	rm $(PREFIX)/share/locale/**/LC_MESSAGES/iconify.mo
+	@echo "uninstalling"
+	@rm $(BIN_DIR)/iconify
+	@rm $(ICON_DIR)/iconify.png
+	@for i in `ls $(PO_DIR)/*.po` ; do \
+		rm -f $(LOCALE_DIR)/`echo $$i | grep -o [^/]*$$ | sed -e s/.po//`/LC_MESSAGES/iconify.mo || test -z "" ; \
+	done
