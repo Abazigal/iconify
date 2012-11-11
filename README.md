@@ -1,7 +1,7 @@
 Iconify
 =======
 
-Iconify is a tool written in C which allow to run any command in a simple GTK interface that can be minimize to an icon in the notification bar.
+Iconify is a tool written in C which allow to run any command in a simple GTK interface that can be minimized to an icon in the notification bar.
 
 ## Usage
  
