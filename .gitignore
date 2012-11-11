@@ -1,6 +1,5 @@
 *.[oa]
 *~
 *.swp
-mo/*
-mo
+*.mo
 iconify
