@@ -1,4 +1,4 @@
-CFLAGS=
+CFLAGS=-Wall -O3
 GTK=`pkg-config --cflags --libs gtk+-3.0`
 
 PREFIX=/usr
@@ -14,11 +14,11 @@ MO = $(PO:%.po=%.mo)
 all : iconify
 
 iconify: iconify.o
-	gcc iconify.o -O3 -o iconify $(CFLAGS) $(GTK)
+	gcc iconify.o -o iconify $(CFLAGS) $(GTK)
 
 
 %.o: src/%.c
-	gcc -c -g -Wall -O3 $(CFLAGS) $< $(GTK)
+	gcc -c $(CFLAGS) $< $(GTK)
 
 $(MO): $(PO_DIR)/%.mo: $(PO_DIR)/%.po
 	@echo "formatting '$*.po'"
